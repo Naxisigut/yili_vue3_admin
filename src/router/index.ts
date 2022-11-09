@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/login/index.vue"),
   },
   {
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: () => import("@/views/dashboard/index.vue"),
   },
@@ -18,4 +18,6 @@ const routes: Array<RouteRecordRaw> = [
 export const router = createRouter({
   routes,
   history: createWebHashHistory(), // hash模式
+  strict: true, // 严格检查路径末尾是否有尾部斜线
+  scrollBehavior: () => ({ left: 0, top: 0 }), // 路由跳转时自动到页面最顶端
 });

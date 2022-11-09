@@ -1,5 +1,5 @@
 <template>
-  <div class="">dash</div>
+  <div class="dash">dash</div>
 </template>
 
 <script setup lang="ts"></script>
