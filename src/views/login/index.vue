@@ -3,7 +3,13 @@
     <div class="login_box">
       <t-card>
         <h2>Vue3 Admin</h2>
-        <t-form ref="form" :rules="rules" :colon="true" :label-width="0">
+        <t-form
+          ref="form"
+          :data="loginForm"
+          :rules="rules"
+          :colon="true"
+          :label-width="0"
+        >
           <t-form-item name="username">
             <t-input
               v-model="loginForm.username"
@@ -29,7 +35,9 @@
           </t-form-item>
 
           <t-form-item>
-            <t-button theme="primary" type="submit" block>登录</t-button>
+            <t-button @click="submit" theme="primary" type="submit" block
+              >登录</t-button
+            >
           </t-form-item>
         </t-form>
       </t-card>
@@ -39,22 +47,27 @@
 
 <script setup lang="ts">
 import { Icon } from "tdesign-vue-next";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import tokenAPI from "@/api/token";
+import type { TokenRequest } from "@/api/type";
 
-type LoginForm = {
-  username: string;
-  password: string;
-};
-
-const loginForm = reactive<LoginForm>({
-  username: "",
-  password: "",
+const loginForm = reactive<TokenRequest>({
+  username: "admin",
+  password: "admin123",
 });
 
 const rules = {
   username: [{ required: true, message: "不能为空", trigger: "blur" }],
   password: [{ required: true, message: "不能为空", trigger: "blur" }],
 };
+
+const submit = () => {
+  tokenAPI.createToken(loginForm);
+};
+
+onMounted(() => {
+  // tokenAPI.createToken(loginForm);
+});
 </script>
 
 <style lang="less" scoped>
