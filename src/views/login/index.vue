@@ -9,6 +9,7 @@
           :rules="rules"
           :colon="true"
           :label-width="0"
+          :loading="loading"
         >
           <t-form-item name="username">
             <t-input
@@ -33,11 +34,8 @@
               </template>
             </t-input>
           </t-form-item>
-
           <t-form-item>
-            <t-button @click="submit" theme="primary" type="submit" block
-              >登录</t-button
-            >
+            <t-button @click="login" theme="primary" block>登录</t-button>
           </t-form-item>
         </t-form>
       </t-card>
@@ -47,13 +45,17 @@
 
 <script setup lang="ts">
 import { Icon } from "tdesign-vue-next";
-import { reactive, onMounted } from "vue";
-import tokenAPI from "@/api/token";
+import type { FormValidateResult } from "tdesign-vue-next";
+import { reactive, onMounted, ref } from "vue";
+import { useAppStore } from "@/store";
+import { useRouter } from "vue-router";
 import type { TokenRequest } from "@/api/type";
+const appStore = useAppStore();
+const router = useRouter();
 
 const loginForm = reactive<TokenRequest>({
-  username: "admin",
-  password: "admin123",
+  username: "",
+  password: "",
 });
 
 const rules = {
@@ -61,8 +63,22 @@ const rules = {
   password: [{ required: true, message: "不能为空", trigger: "blur" }],
 };
 
-const submit = () => {
-  tokenAPI.createToken(loginForm);
+const form = ref<any>(null);
+const loading = ref<boolean>(false);
+
+const login = () => {
+  loading.value = true;
+  form.value
+    .validate()
+    .then(async (res: FormValidateResult<FormData>) => {
+      if (res == true) {
+        await appStore.loginAct(loginForm);
+        router.push({ name: "dashboard" });
+      }
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 };
 
 onMounted(() => {

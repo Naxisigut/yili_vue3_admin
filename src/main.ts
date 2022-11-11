@@ -7,8 +7,12 @@ import TDesign from "tdesign-vue-next"; // TDesign
 import "tdesign-vue-next/dist/reset.css";
 import "tdesign-vue-next/es/style/index.css";
 
+// 引入pinia
+import { createPinia } from "pinia";
+
 const app = createApp(App);
 app.use(router);
 app.use(TDesign);
+app.use(createPinia());
 
 app.mount("#app");
