@@ -8,3 +8,10 @@ export type ErrorResponse = {
   code: number;
   message: string;
 };
+
+export type UserInfo = {
+  username: string;
+  nickname: string;
+  roles: [string];
+  permissons: [string];
+};
