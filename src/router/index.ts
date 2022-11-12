@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import { useAppStore } from "@/store/appStore";
 
+import layoutView from "@/views/common/layout.vue";
+
 // route的interface RouteRecordRaw从vue-router中引入
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,8 +13,21 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "dashboard",
-    component: () => import("@/views/dashboard/index.vue"),
+    name: "root",
+    redirect: "/dashboard",
+    component: layoutView,
+    children: [
+      {
+        path: "dashboard",
+        name: "dashboard",
+        component: () => import("@/views/dashboard/index.vue"),
+      },
+      {
+        path: "test",
+        name: "test",
+        component: () => import("@/views/test/index.vue"),
+      },
+    ],
   },
 ];
 

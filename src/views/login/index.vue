@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="loginView">
 import { Icon } from "tdesign-vue-next";
 import type { FormValidateResult } from "tdesign-vue-next";
 import { reactive, onMounted, ref } from "vue";
