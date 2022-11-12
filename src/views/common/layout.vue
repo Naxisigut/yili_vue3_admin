@@ -3,7 +3,7 @@
   <t-layout class="layoutContainer">
     <t-aside>Aside</t-aside>
     <t-layout>
-      <t-header>Header</t-header>
+      <GlobalHeader></GlobalHeader>
       <t-content>
         <router-view></router-view>
       </t-content>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts" name="layoutView">
-//
+import GlobalHeader from "./conponents/GlobalHeader.vue";
 </script>
 
 <style lang="less" scoped>
