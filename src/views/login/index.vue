@@ -50,6 +50,7 @@ import { reactive, onMounted, ref } from "vue";
 import { useAppStore } from "@/store";
 import { useRouter } from "vue-router";
 import type { TokenRequest } from "@/api/type";
+// import { Form } from "tdesign-vue-next";
 const appStore = useAppStore();
 const router = useRouter();
 
@@ -63,13 +64,14 @@ const rules = {
   password: [{ required: true, message: "不能为空", trigger: "blur" }],
 };
 
+// const form = ref<InstanceType<typeof Form> | null>(null);
 const form = ref<any>(null);
 const loading = ref<boolean>(false);
 
 const login = () => {
   loading.value = true;
   form.value
-    .validate()
+    ?.validate()
     .then(async (res: FormValidateResult<FormData>) => {
       if (res == true) {
         await appStore.loginAct(loginForm);
@@ -82,7 +84,7 @@ const login = () => {
 };
 
 onMounted(() => {
-  // tokenAPI.createToken(loginForm);
+  // console.log("form.value =", form.value);
 });
 </script>
 

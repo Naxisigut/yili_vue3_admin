@@ -10,6 +10,8 @@ export const useAppStore = defineStore("app", {
     };
   },
 
+  persist: true,
+
   // actions建议使用普通函数。使用箭头函数会导致this推断异常
   actions: {
     setToken(token: string) {
