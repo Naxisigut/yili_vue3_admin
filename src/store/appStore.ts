@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import type { TokenRequest } from "@/api/type";
 import tokenAPI from "@/api/token";
+import { useUserStore } from "./userStore";
+// import { useRouter } from "vue-router";
 
 export const useAppStore = defineStore("app", {
   // state要使用箭头函数
@@ -17,11 +19,19 @@ export const useAppStore = defineStore("app", {
     setToken(token: string) {
       this.token = token;
     },
+    clearToken() {
+      this.token = "";
+    },
 
     // 登录
     async loginAct(loginForm: TokenRequest) {
       const tokenGet = await tokenAPI.createToken(loginForm);
       this.setToken(tokenGet);
+    },
+    // 登出
+    logout() {
+      useUserStore().clearCurrentUser();
+      this.clearToken();
     },
   },
 });

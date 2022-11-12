@@ -47,11 +47,13 @@
 import { Icon } from "tdesign-vue-next";
 import type { FormValidateResult } from "tdesign-vue-next";
 import { reactive, onMounted, ref } from "vue";
-import { useAppStore } from "@/store";
+import { useAppStore, useUserStore } from "@/store";
 import { useRouter } from "vue-router";
 import type { TokenRequest } from "@/api/type";
-// import { Form } from "tdesign-vue-next";
+
 const appStore = useAppStore();
+const userStore = useUserStore();
+
 const router = useRouter();
 
 const loginForm = reactive<TokenRequest>({
@@ -73,8 +75,9 @@ const login = () => {
   form.value
     ?.validate()
     .then(async (res: FormValidateResult<FormData>) => {
-      if (res == true) {
+      if (res === true) {
         await appStore.loginAct(loginForm);
+        await userStore.getUserInfo();
         router.push({ name: "dashboard" });
       }
     })
