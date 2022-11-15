@@ -1,7 +1,7 @@
 <template>
   <div>
     <t-header class="globalHeader">
-      <div>菜单折叠按钮</div>
+      <CollapseBtn v-model:is-collapsed="layoutStore.isCollapsed"></CollapseBtn>
       <div class="options">
         <div class="user">
           <t-dropdown :options="options" @click="clickHandler">
@@ -22,13 +22,15 @@
 
 <script setup lang="ts" name="GlobalHeader">
 import type { DropdownOption } from "tdesign-vue-next"; // TDesign
-import { useAppStore, useUserStore } from "@/store";
+import { useAppStore, useUserStore, useLayoutStore } from "@/store";
 import { useRouter, useRoute } from "vue-router";
+import CollapseBtn from "@/components/CollapseBtn.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const appStore = useAppStore();
+const layoutStore = useLayoutStore();
 
 const options = [{ content: "退出登录", value: "logout" }];
 

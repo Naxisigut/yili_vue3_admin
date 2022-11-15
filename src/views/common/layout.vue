@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="layoutContainer"> -->
   <t-layout class="layoutContainer">
-    <t-aside>Aside</t-aside>
+    <SideBar></SideBar>
     <t-layout>
       <GlobalHeader></GlobalHeader>
       <t-content>
@@ -15,6 +15,7 @@
 
 <script setup lang="ts" name="layoutView">
 import GlobalHeader from "./conponents/GlobalHeader.vue";
+import SideBar from "./conponents/SideBar.vue";
 </script>
 
 <style lang="less" scoped>
