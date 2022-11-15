@@ -4,7 +4,16 @@
       <div>菜单折叠按钮</div>
       <div class="options">
         <div class="user">
-          <t-button theme="default" variant="text"> 用户名</t-button>
+          <t-dropdown :options="options" @click="clickHandler">
+            <t-space>
+              <t-button variant="text">
+                <t-space :size="0">
+                  {{ userStore.currentUser?.nickname }}
+                  <t-icon name="chevron-down" size="16" />
+                </t-space>
+              </t-button>
+            </t-space>
+          </t-dropdown>
         </div>
       </div>
     </t-header>
@@ -12,7 +21,27 @@
 </template>
 
 <script setup lang="ts" name="GlobalHeader">
-// import { Icon } from "tdesign-vue-next"; // TDesign
+import type { DropdownOption } from "tdesign-vue-next"; // TDesign
+import { useAppStore, useUserStore } from "@/store";
+import { useRouter, useRoute } from "vue-router";
+
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
+const appStore = useAppStore();
+
+const options = [{ content: "退出登录", value: "logout" }];
+
+const clickHandler = ({ value }: DropdownOption) => {
+  switch (value) {
+    case "logout":
+      appStore.logout();
+      router.push(`/login?redirect=${route.path}`);
+      break;
+    default:
+      throw new Error("指令错误");
+  }
+};
 </script>
 
 <style lang="less" scoped>
