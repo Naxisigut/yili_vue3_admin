@@ -15,5 +15,5 @@ export type UserInfo = {
   username: string;
   nickname: string;
   roles: [string];
-  permissons: [string];
+  permissions: [string];
 };

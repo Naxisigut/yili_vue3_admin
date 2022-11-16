@@ -15,7 +15,7 @@ declare module "vue-router" {
 }
 
 // route的interface RouteRecordRaw从vue-router中引入
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
     name: "login",
