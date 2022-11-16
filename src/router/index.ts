@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import { useAppStore } from "@/store/appStore";
 import layoutView from "@/views/common/layout.vue";
+import pageLayoutView from "@/views/common/page-layout.vue";
 import { Permisson_Enum } from "@/config/permission.config";
 
 // 重定义route.meta的类型RouteMeta
@@ -35,6 +36,28 @@ const routes: Array<RouteRecordRaw> = [
           permission: Permisson_Enum.DASHBOARD,
           icon: "dashboard",
         },
+      },
+      {
+        path: "user",
+        name: "user",
+        component: pageLayoutView,
+        redirect: { name: "user-list" },
+        meta: {
+          title: "用户",
+          icon: "usergroup",
+          permission: Permisson_Enum.USER,
+        },
+        children: [
+          {
+            path: "user-list",
+            name: "user-list",
+            component: () => import("@/views/user/index.vue"),
+            meta: {
+              title: "用户列表",
+              permission: Permisson_Enum.USER_LIST,
+            },
+          },
+        ],
       },
     ],
   },
