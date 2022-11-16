@@ -4,6 +4,15 @@ import { useAppStore } from "@/store/appStore";
 
 import layoutView from "@/views/common/layout.vue";
 
+// 重定义route.meta的类型RouteMeta
+declare module "vue-router" {
+  interface RouteMeta extends Record<string | number | symbol, unknown> {
+    permission?: string;
+    title?: string;
+    icon?: string;
+  }
+}
+
 // route的interface RouteRecordRaw从vue-router中引入
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "dashboard",
         name: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
+        meta: {
+          title: "控制台",
+          permission: "dashboard",
+          icon: "dashboard",
+        },
       },
       {
         path: "test",
