@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import { useAppStore } from "@/store/appStore";
-
 import layoutView from "@/views/common/layout.vue";
+import { Permisson_Enum } from "@/config/permission.config";
 
 // 重定义route.meta的类型RouteMeta
 declare module "vue-router" {
@@ -32,14 +32,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           title: "控制台",
-          permission: "dashboard",
+          permission: Permisson_Enum.DASHBOARD,
           icon: "dashboard",
         },
-      },
-      {
-        path: "test",
-        name: "test",
-        component: () => import("@/views/test/index.vue"),
       },
     ],
   },
