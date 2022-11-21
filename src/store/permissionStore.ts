@@ -32,7 +32,7 @@ export const usePermissionStore = defineStore("permissionStore", {
       routes: [],
     };
   },
-
+  persist: true,
   getters: {
     // 根据routes获得菜单（此项目中所有需要渲染的菜单项都放在MENU_ROOT_ROUTE的children中，所以逻辑上有一定简化）
     menuRoutes(): RouteRecordRaw[] {
