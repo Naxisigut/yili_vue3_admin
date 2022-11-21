@@ -14,6 +14,8 @@ declare module "vue-router" {
   }
 }
 
+export const MENU_ROOT_ROUTE = "root";
+
 // route的interface RouteRecordRaw从vue-router中引入
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -23,7 +25,7 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "root",
+    name: MENU_ROOT_ROUTE, // 所有需要渲染的菜单路由都放置在MENU_ROOT_ROUTE的children中
     redirect: "/dashboard",
     component: layoutView,
     children: [
