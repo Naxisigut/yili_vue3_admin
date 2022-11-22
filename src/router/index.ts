@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           title: "控制台",
-          permission: Permisson_Enum.DASHBOARD,
+          permission: Permisson_Enum.DASHBOARD, // 路由级别的权限控制，可以通过路由守卫完成
           icon: "dashboard",
         },
       },
