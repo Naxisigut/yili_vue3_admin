@@ -1,4 +1,5 @@
 <template>
+  <!-- 有children时递归渲染 -->
   <t-submenu
     v-if="item.children && item.children.length > 0"
     :title="item.meta.title"
@@ -19,6 +20,7 @@
     </t-menu-item>
   </t-submenu>
 
+  <!-- 无children时直接渲染即可 -->
   <t-menu-item v-else :value="item.name" :to="{ name: item.name }">
     <template #icon>
       <Icon :name="item.meta.icon"></Icon>

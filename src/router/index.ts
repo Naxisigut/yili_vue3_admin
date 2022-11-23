@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from "vue-router";
 import { useAppStore } from "@/store/appStore";
 import layoutView from "@/views/common/layout.vue";
 import pageLayoutView from "@/views/common/page-layout.vue";
-import { Permisson_Enum } from "@/config/permission.config";
+import { PermsEnum } from "@/config/permission.config";
 
 // 重定义route.meta的类型RouteMeta
 declare module "vue-router" {
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/dashboard/index.vue"),
         meta: {
           title: "控制台",
-          permission: Permisson_Enum.DASHBOARD, // 路由级别的权限控制，可以通过路由守卫完成
+          permission: PermsEnum.DASHBOARD, // 路由级别的权限控制，可以通过路由守卫完成
           icon: "dashboard",
         },
       },
@@ -47,7 +47,7 @@ export const routes: Array<RouteRecordRaw> = [
         meta: {
           title: "用户",
           icon: "usergroup",
-          permission: Permisson_Enum.USER,
+          permission: PermsEnum.USER,
         },
         children: [
           {
@@ -56,7 +56,7 @@ export const routes: Array<RouteRecordRaw> = [
             component: () => import("@/views/user/index.vue"),
             meta: {
               title: "用户列表",
-              permission: Permisson_Enum.USER_LIST,
+              permission: PermsEnum.USER_LIST,
             },
           },
         ],

@@ -1,4 +1,4 @@
-export enum Permisson_Enum {
+export enum PermsEnum {
   DASHBOARD = "dashboard",
   USER = "user",
   USER_LIST = "user:list",
